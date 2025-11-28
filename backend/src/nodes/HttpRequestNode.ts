@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { ExecutionContext } from '../types';
 
 export class HttpRequestNode {
-  async execute(parameters: any, context: ExecutionContext): Promise<any> {
+  async execute(parameters: any, _context: ExecutionContext): Promise<any> {
     const { method = 'GET', url, headers = {}, body, timeout = 30000 } = parameters;
 
     if (!url) {

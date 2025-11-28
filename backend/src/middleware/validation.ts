@@ -2,17 +2,18 @@ import Joi from 'joi';
 import { Request, Response, NextFunction } from 'express';
 
 export const validate = (schema: Joi.ObjectSchema) => {
-  return (req: Request, res: Response, next: NextFunction) => {
+  return (req: Request, res: Response, next: NextFunction): void => {
     const { error } = schema.validate(req.body, { abortEarly: false });
     
     if (error) {
-      return res.status(400).json({
+      res.status(400).json({
         error: 'Validation error',
         details: error.details.map(detail => ({
           field: detail.path.join('.'),
           message: detail.message,
         })),
       });
+      return;
     }
     
     next();

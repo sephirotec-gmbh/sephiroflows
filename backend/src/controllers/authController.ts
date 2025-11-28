@@ -6,8 +6,8 @@ import { query } from '../config/database';
 import { redisClient } from '../config/redis';
 import { AuthenticatedRequest } from '../types';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'dev-secret-key';
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '24h';
+const JWT_SECRET: string = process.env.JWT_SECRET || 'dev-secret-key';
+const JWT_EXPIRES_IN: string = process.env.JWT_EXPIRES_IN || '24h';
 
 export const register = async (req: Request, res: Response) => {
   const { email, password, name, companyName } = req.body;
@@ -113,7 +113,7 @@ export const login = async (req: Request, res: Response) => {
     );
     
     // Generate JWT
-    const token = jwt.sign({ sessionId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN });
+    const token = jwt.sign({ sessionId }, JWT_SECRET, { expiresIn: JWT_EXPIRES_IN } as jwt.SignOptions);
     
     // Update last login
     await query('UPDATE users SET last_login_at = NOW() WHERE id = $1', [user.id]);

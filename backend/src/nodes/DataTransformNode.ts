@@ -1,7 +1,7 @@
 import { ExecutionContext } from '../types';
 
 export class DataTransformNode {
-  async execute(parameters: any, context: ExecutionContext): Promise<any> {
+  async execute(parameters: any, _context: ExecutionContext): Promise<any> {
     const { mapping = {} } = parameters;
 
     // Simple data transformation based on mapping

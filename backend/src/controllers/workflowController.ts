@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { query } from '../config/database';
-import { AuthenticatedRequest, Workflow } from '../types';
+import { AuthenticatedRequest } from '../types';
 import { WorkflowExecutor } from '../engine/WorkflowExecutor';
 
 export const listWorkflows = async (req: AuthenticatedRequest, res: Response) => {

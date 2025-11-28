@@ -4,7 +4,7 @@
  */
 
 import bcrypt from 'bcrypt';
-import { pool, query } from '../config/database';
+import { query } from '../config/database';
 
 const seed = async () => {
   try {

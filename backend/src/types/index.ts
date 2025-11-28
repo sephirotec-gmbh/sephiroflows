@@ -12,6 +12,10 @@ export interface AuthenticatedRequest extends Request {
       canManageCredentials: boolean;
     };
   };
+  // Explicitly include Express Request properties to fix TypeScript errors
+  params: any;
+  body: any;
+  headers: any;
 }
 
 export interface Company {

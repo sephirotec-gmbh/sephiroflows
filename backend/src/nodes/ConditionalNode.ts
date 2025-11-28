@@ -1,7 +1,7 @@
 import { ExecutionContext } from '../types';
 
 export class ConditionalNode {
-  async execute(parameters: any, context: ExecutionContext): Promise<any> {
+  async execute(parameters: any, _context: ExecutionContext): Promise<any> {
     const { condition, operator = 'equals', value } = parameters;
 
     if (condition === undefined) {

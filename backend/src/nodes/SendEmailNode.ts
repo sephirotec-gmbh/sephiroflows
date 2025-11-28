@@ -17,7 +17,7 @@ export class SendEmailNode {
     });
   }
 
-  async execute(parameters: any, context: ExecutionContext): Promise<any> {
+  async execute(parameters: any, _context: ExecutionContext): Promise<any> {
     const { to, subject, body, from, isHtml = false } = parameters;
 
     if (!to || !subject || !body) {

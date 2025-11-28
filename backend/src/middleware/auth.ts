@@ -9,14 +9,15 @@ export const authenticateToken = async (
   req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
-) => {
+): Promise<void> => {
   try {
     // Check for token in Authorization header or cookie
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1]; // Bearer TOKEN
     
     if (!token) {
-      return res.status(401).json({ error: 'Authentication required' });
+      res.status(401).json({ error: 'Authentication required' });
+      return;
     }
 
     // Verify JWT
@@ -25,7 +26,8 @@ export const authenticateToken = async (
     // Check if session exists in Redis
     const sessionData = await redisClient.get(`session:${decoded.sessionId}`);
     if (!sessionData) {
-      return res.status(401).json({ error: 'Session expired' });
+      res.status(401).json({ error: 'Session expired' });
+      return;
     }
     
     const session = JSON.parse(sessionData);
@@ -42,19 +44,22 @@ export const authenticateToken = async (
     next();
   } catch (error) {
     if (error instanceof jwt.TokenExpiredError) {
-      return res.status(401).json({ error: 'Token expired' });
+      res.status(401).json({ error: 'Token expired' });
+      return;
     }
     if (error instanceof jwt.JsonWebTokenError) {
-      return res.status(401).json({ error: 'Invalid token' });
+      res.status(401).json({ error: 'Invalid token' });
+      return;
     }
-    return res.status(500).json({ error: 'Authentication failed' });
+    res.status(500).json({ error: 'Authentication failed' });
   }
 };
 
 export const requirePermission = (permission: 'canEditWorkflows' | 'canExecuteWorkflows' | 'canManageCredentials') => {
-  return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+  return (req: AuthenticatedRequest, res: Response, next: NextFunction): void => {
     if (!req.user || !req.user.permissions[permission]) {
-      return res.status(403).json({ error: 'Insufficient permissions' });
+      res.status(403).json({ error: 'Insufficient permissions' });
+      return;
     }
     next();
   };
