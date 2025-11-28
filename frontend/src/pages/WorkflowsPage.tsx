@@ -1,7 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { workflowsAPI } from '../services/api';
-import { Plus, Edit, Trash2, Play, Pause } from 'lucide-react';
+import { Plus, Edit, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 
 const WorkflowsPage = () => {

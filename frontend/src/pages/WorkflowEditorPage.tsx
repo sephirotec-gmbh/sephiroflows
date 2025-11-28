@@ -10,13 +10,13 @@ import ReactFlow, {
   useEdgesState,
   Connection,
   Node,
-  Edge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { workflowsAPI, nodesAPI } from '../services/api';
 import { Save, Play, ArrowLeft } from 'lucide-react';
 import NodeLibrary from '../components/NodeLibrary';
 import NodeConfigPanel from '../components/NodeConfigPanel';
+import { Workflow } from '../types';
 
 const WorkflowEditorPage = () => {
   const { id } = useParams();
@@ -63,9 +63,9 @@ const WorkflowEditorPage = () => {
       const data = {
         name: workflowName,
         description: workflowDescription,
-        nodes,
-        edges,
-        status: 'draft',
+        nodes: nodes as any,
+        edges: edges as any,
+        status: 'draft' as Workflow['status'],
       };
 
       if (isNewWorkflow) {
@@ -89,9 +89,9 @@ const WorkflowEditorPage = () => {
         const data = await workflowsAPI.create({
           name: workflowName,
           description: workflowDescription,
-          nodes,
-          edges,
-          status: 'active',
+          nodes: nodes as any,
+          edges: edges as any,
+          status: 'active' as Workflow['status'],
         });
         return workflowsAPI.execute(data.workflow.id, {});
       }
@@ -108,7 +108,7 @@ const WorkflowEditorPage = () => {
     [setEdges]
   );
 
-  const onNodeClick = useCallback((event: React.MouseEvent, node: Node) => {
+  const onNodeClick = useCallback((_event: React.MouseEvent, node: Node) => {
     setSelectedNode(node);
   }, []);
 

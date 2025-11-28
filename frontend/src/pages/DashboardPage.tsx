@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { workflowsAPI, executionsAPI } from '../services/api';
-import { Workflow, Activity, CheckCircle, XCircle, Clock } from 'lucide-react';
+import { Workflow, CheckCircle, XCircle } from 'lucide-react';
 
 const DashboardPage = () => {
   const { data: workflowsData } = useQuery({
@@ -19,7 +19,6 @@ const DashboardPage = () => {
   const activeWorkflows = workflows.filter((w) => w.status === 'active').length;
   const successCount = executions.filter((e) => e.status === 'success').length;
   const failedCount = executions.filter((e) => e.status === 'failed').length;
-  const runningCount = executions.filter((e) => e.status === 'running').length;
 
   const stats = [
     { name: 'Total Workflows', value: workflows.length, icon: Workflow, color: 'blue' },

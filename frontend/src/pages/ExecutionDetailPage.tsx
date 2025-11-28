@@ -11,16 +11,16 @@ const ExecutionDetailPage = () => {
   const { data: executionData, isLoading: executionLoading } = useQuery({
     queryKey: ['execution', id],
     queryFn: () => executionsAPI.get(id!),
-    refetchInterval: (data) => {
+    refetchInterval: (query) => {
       // Stop refetching if execution is finished
-      return data?.execution.status === 'running' ? 2000 : false;
+      return query.state.data?.execution.status === 'running' ? 2000 : false;
     },
   });
 
   const { data: logsData, isLoading: logsLoading } = useQuery({
     queryKey: ['execution-logs', id],
     queryFn: () => executionsAPI.getLogs(id!),
-    refetchInterval: (data) => {
+    refetchInterval: () => {
       // Stop refetching if execution is finished
       return executionData?.execution.status === 'running' ? 2000 : false;
     },
