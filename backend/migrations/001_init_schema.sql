@@ -285,4 +285,4 @@ VALUES ('00000000-0000-0000-0000-000000000001', 'Demo Company', 'demo', 'active'
 -- Insert default user (password: demo123)
 -- bcrypt hash of 'demo123' with salt rounds 10
 INSERT INTO users (id, company_id, email, name, password_hash, can_edit_workflows, can_execute_workflows, can_manage_credentials)
-VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'demo@sephiroflows.app', 'Demo User', '$2b$10$rKwEYvJZWY5hK5gFqC.LCu4LKqCU5pV0RI8cKx9pZN.TqN8Lq9XfG', true, true, true);
+VALUES ('00000000-0000-0000-0000-000000000001', '00000000-0000-0000-0000-000000000001', 'demo@sephiroflows.app', 'Demo User', '$2b$10$6aeQppj8kKM0vykKoFiHnehrZo3SJge0TdGknCoXoor.EQJcuXPkW', true, true, true);
